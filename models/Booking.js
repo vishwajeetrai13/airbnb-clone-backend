@@ -1,5 +1,5 @@
 const {
-  DataTypes
+  DataTypes, NOW
 } = require('sequelize');
 
 module.exports = sequelize => {
@@ -7,7 +7,6 @@ module.exports = sequelize => {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -16,9 +15,9 @@ module.exports = sequelize => {
     userId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      // defaultValue: null,
       primaryKey: false,
-      autoIncrement: false,
+      // autoIncrement: false,
       comment: null,
       field: "userId",
       references: {
@@ -29,9 +28,9 @@ module.exports = sequelize => {
     listingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      // defaultValue: null,
       primaryKey: false,
-      autoIncrement: false,
+      // autoIncrement: false,
       comment: null,
       field: "listingId",
       references: {
@@ -42,7 +41,7 @@ module.exports = sequelize => {
     checkinDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -51,7 +50,7 @@ module.exports = sequelize => {
     checkoutDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -60,7 +59,7 @@ module.exports = sequelize => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -69,7 +68,7 @@ module.exports = sequelize => {
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -78,7 +77,7 @@ module.exports = sequelize => {
     totalCost: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: null,
+      defaultValue: DataTypes.FLOAT,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
