@@ -7,7 +7,6 @@ module.exports = sequelize => {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -54,7 +53,7 @@ module.exports = sequelize => {
       field: "createdAt"
     },
     byHost: {
-      type: DataTypes.INTEGER(1),
+      type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: "0",
       primaryKey: false,

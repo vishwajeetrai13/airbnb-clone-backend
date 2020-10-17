@@ -5,9 +5,8 @@ const {
 module.exports = sequelize => {
   const attributes = {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.UUID,
       allowNull: false,
-      defaultValue: null,
       primaryKey: true,
       autoIncrement: false,
       comment: null,

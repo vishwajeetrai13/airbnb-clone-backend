@@ -7,7 +7,6 @@ module.exports = sequelize => {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: true,
       autoIncrement: true,
       comment: null,
@@ -59,7 +58,7 @@ module.exports = sequelize => {
       field: "maxOccupants"
     },
     policies: {
-      type: tinyblob,
+      type: DataTypes.JSON,
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
@@ -68,7 +67,7 @@ module.exports = sequelize => {
       field: "policies"
     },
     amenities: {
-      type: tinyblob,
+      type: DataTypes.JSON,
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
