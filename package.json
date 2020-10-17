@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:seed":"node dbSeedandMigration.js",
+    "dev:seed": "node src/dbSeedandMigration.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
