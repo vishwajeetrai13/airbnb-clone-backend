@@ -1,7 +1,8 @@
 const express=require("express")
 var cors = require('cors')
-listingRouteSample = require("./routes/listingRoute").listingRouteSample;
-bookingRouteSample = require("./routes/bookingRoute").bookingRouteSample;
+// listingRouteSample = require("./routes/listingRoute").listingRouteSample;
+import { listingRouteSample } from "./routes/listingRoute";
+let bookingRouteSample = require("./routes/bookingRoute").bookingRouteSample;
 const app = express();
 app.options('*', cors())
 app.set("port", process.env.PORT || 3000)

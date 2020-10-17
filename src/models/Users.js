@@ -15,7 +15,6 @@ module.exports = sequelize => {
     firstName: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -24,7 +23,6 @@ module.exports = sequelize => {
     lastName: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: "0",
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -33,7 +31,6 @@ module.exports = sequelize => {
     introductionOfUser: {
       type: DataTypes.STRING(255),
       allowNull: true,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -41,8 +38,7 @@ module.exports = sequelize => {
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: null,
+      allowNull: true,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -50,8 +46,7 @@ module.exports = sequelize => {
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: null,
+      allowNull: true,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -60,7 +55,6 @@ module.exports = sequelize => {
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -69,7 +63,6 @@ module.exports = sequelize => {
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -78,7 +71,6 @@ module.exports = sequelize => {
     dob: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,

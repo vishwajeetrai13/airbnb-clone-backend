@@ -15,7 +15,7 @@ module.exports = sequelize => {
     hostID: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -28,7 +28,7 @@ module.exports = sequelize => {
     pricePerDay: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -37,7 +37,7 @@ module.exports = sequelize => {
     miscCostPercentage: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -46,7 +46,7 @@ module.exports = sequelize => {
     address: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -55,7 +55,7 @@ module.exports = sequelize => {
     listingDescription: {
       type: DataTypes.STRING(255),
       allowNull: true,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -64,7 +64,7 @@ module.exports = sequelize => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -73,7 +73,7 @@ module.exports = sequelize => {
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -82,7 +82,7 @@ module.exports = sequelize => {
     avgRating: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -91,7 +91,7 @@ module.exports = sequelize => {
     cityId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -104,7 +104,7 @@ module.exports = sequelize => {
     features: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,

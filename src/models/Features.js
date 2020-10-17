@@ -15,7 +15,6 @@ module.exports = sequelize => {
     typeofListing: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -24,7 +23,6 @@ module.exports = sequelize => {
     bedrooms: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -33,7 +31,6 @@ module.exports = sequelize => {
     bathrooms: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -42,7 +39,6 @@ module.exports = sequelize => {
     beds: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -51,7 +47,6 @@ module.exports = sequelize => {
     maxOccupants: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -60,7 +55,6 @@ module.exports = sequelize => {
     policies: {
       type: DataTypes.JSON,
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -69,7 +63,6 @@ module.exports = sequelize => {
     amenities: {
       type: DataTypes.JSON,
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,

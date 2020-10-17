@@ -14,17 +14,17 @@ const sequelize = new Sequelize(database,user,password,{
 
 
 const models = [
-  require(path.join(__dirname, "./models/Booking")),
-  require(path.join(__dirname, "./models/Bookmark")),
-  require(path.join(__dirname, "./models/City")),
-  require(path.join(__dirname, "./models/Country")),
-  require(path.join(__dirname, "./models/Features")),
-  require(path.join(__dirname, "./models/Image")),
-  require(path.join(__dirname, "./models/Listings")),
-  require(path.join(__dirname, "./models/Payments")),
-  require(path.join(__dirname, "./models/Reviews")),
-  require(path.join(__dirname, "./models/State")),
   require(path.join(__dirname, "./models/Users")),
+  require(path.join(__dirname, "./models/Features")),
+  require(path.join(__dirname, "./models/Country")),
+  require(path.join(__dirname, "./models/State")),
+  require(path.join(__dirname, "./models/City")),
+  require(path.join(__dirname, "./models/Listings")),
+  require(path.join(__dirname, "./models/Image")),
+  require(path.join(__dirname, "./models/Bookmark")),
+  require(path.join(__dirname, "./models/Booking")),
+  require(path.join(__dirname, "./models/Reviews")),
+  require(path.join(__dirname, "./models/Payments")),
 ];
 
 

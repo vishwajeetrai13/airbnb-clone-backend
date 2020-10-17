@@ -6,7 +6,7 @@
   "scripts": {
     "dev:seed": "node src/dbSeedandMigration.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,9 @@
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "nodemon": "^2.0.5",
     "sequelize-cli": "^6.2.0"
   }

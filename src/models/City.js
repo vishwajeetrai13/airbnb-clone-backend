@@ -15,7 +15,7 @@ module.exports = sequelize => {
     cityName: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -24,7 +24,7 @@ module.exports = sequelize => {
     stateId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
+      
       primaryKey: false,
       autoIncrement: false,
       comment: null,

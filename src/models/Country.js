@@ -15,7 +15,6 @@ module.exports = sequelize => {
     countryName: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
