@@ -1,10 +1,9 @@
-const { fake } = require("faker");
 const faker = require("faker");
 const random = require("lodash").random;
 const times = require("lodash").times;
 var Sequelize = require("sequelize");
 var sequelize = require("../src/config/configDb");
-const db = require("../src/sequelize/indexModel");
+const db = require("./migrateAndSeed");
 
 feedRandomUsers = (numberOFData) => {
   return db.user.bulkCreate(
@@ -30,15 +29,7 @@ feedRandomListings = (numberOFData) => {
       listingDescription: faker.lorem.sentence(),
       avgRating: random(1, 5),
       cityId: random(1, numberOFData),
-      features: {
-        typeofListing: "private room",
-        bedrooms: random(1, 5),
-        bathrooms: random(1, 5),
-        beds: random(1, 5),
-        maxOccupants: random(1, 5),
-        policies: {},
-        amenities: {},
-      },
+      features: random(1, numberOFData),
     }))
   );
 };
@@ -52,36 +43,16 @@ feedRandomListingImages = (numberOFData) => {
   );
 };
 
-feedBookmark = (numberOFData) => {
-  return db.bookmark.bulkCreate(
+randomFeatures = (numberOFData) => {
+  return db.feature.bulkCreate(
     times(numberOFData, () => ({
-      listingId: random(1, numberOFData),
-      userId: random(1, numberOFData),
-    }))
-  );
-};
-
-feedCity = (numberOFData) => {
-  return db.city.bulkCreate(
-    times(numberOFData, () => ({
-      cityName: faker.address.city(),
-      stateId: random(1, numberOFData),
-    }))
-  );
-};
-
-feedState = (numberOFData) => {
-  return db.state.bulkCreate(
-    times(numberOFData, () => ({
-      stateName: faker.address.state(),
-      countryId: random(1, numberOFData),
-    }))
-  );
-};
-feedCountry = (numberOFData) => {
-  return db.country.bulkCreate(
-    times(numberOFData, () => ({
-      countryName: faker.address.country(),
+      typeofListing: "private room",
+      bedrooms: random(1, 5),
+      bathrooms: random(1, 5),
+      beds: random(1, 5),
+      maxOccupants: random(1, 5),
+      policies: {},
+      amenities: {},
     }))
   );
 };
@@ -89,21 +60,18 @@ feedCountry = (numberOFData) => {
 async function main() {
   try {
     const numberOFData = 20;
-    await sequelize.sync({ force: true });
-    await feedCountry(numberOFData);
-    await feedState(numberOFData);
-    await feedCity(numberOFData);
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", { raw: true });
+    await sequelize.sync();
     await feedRandomUsers(numberOFData);
     await feedRandomListings(numberOFData);
     await feedRandomListingImages(numberOFData);
-    await feedBookmark(numberOFData);
+    // await randomFeatures(numberOFData);
     console.log(
-      await db.city.findAll({
+      await db.listing.findAll({
         raw: true,
         include: [
           {
-            model: db.state,
-            include: [{ model: db.country }],
+            model: db.user,
           },
         ],
       })

@@ -10,7 +10,13 @@ db.sequelize = sequelize;
 db.user = require("./models/Users")(sequelize);
 db.listing = require("./models/Listings")(sequelize);
 db.listingImage = require("./models/Image")(sequelize);
-// db.feature = require("./models/Features")(sequelize);
+db.bookmark = require("./models/Bookmark")(sequelize);
+db.booking = require("./models/Booking")(sequelize);
+db.city = require("./models/City")(sequelize);
+db.state = require("./models/State")(sequelize);
+db.country = require("./models/Country")(sequelize);
+db.payment = require("./models/Payments")(sequelize);
+db.review = require("./models/Reviews")(sequelize);
 
 associate(db);
 

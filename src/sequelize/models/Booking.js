@@ -1,8 +1,6 @@
-const {
-  DataTypes, NOW
-} = require('sequelize');
+const { DataTypes, NOW } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,7 +8,7 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     userId: {
       type: DataTypes.INTEGER(11),
@@ -20,10 +18,6 @@ module.exports = sequelize => {
       // autoIncrement: false,
       comment: null,
       field: "userId",
-      references: {
-        key: "id",
-        model: "Users_model"
-      }
     },
     listingId: {
       type: DataTypes.INTEGER(11),
@@ -33,28 +27,22 @@ module.exports = sequelize => {
       // autoIncrement: false,
       comment: null,
       field: "listingId",
-      references: {
-        key: "id",
-        model: "Listings_model"
-      }
     },
     checkinDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "checkinDate"
+      field: "checkinDate",
     },
     checkoutDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: NOW,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "checkoutDate"
+      field: "checkoutDate",
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -63,7 +51,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "createdAt"
+      field: "createdAt",
     },
     updatedAt: {
       type: DataTypes.DATE,
@@ -72,7 +60,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "updatedAt"
+      field: "updatedAt",
     },
     totalCost: {
       type: DataTypes.FLOAT,
@@ -81,23 +69,11 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "totalCost"
-    }
+      field: "totalCost",
+    },
   };
   const options = {
     tableName: "Booking",
-    comment: "",
-    indexes: [{
-      name: "Booking_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["userId"]
-    }, {
-      name: "Booking_fk1",
-      unique: false,
-      type: "BTREE",
-      fields: ["listingId"]
-    }]
   };
   const BookingModel = sequelize.define("Booking_model", attributes, options);
   return BookingModel;

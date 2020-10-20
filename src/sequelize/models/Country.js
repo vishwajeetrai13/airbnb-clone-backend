@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,7 +8,7 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     countryName: {
       type: DataTypes.STRING(255),
@@ -18,13 +16,11 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "countryName"
-    }
+      field: "countryName",
+    },
   };
   const options = {
     tableName: "country",
-    comment: "",
-    indexes: []
   };
   const CountryModel = sequelize.define("country_model", attributes, options);
   return CountryModel;
