@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,130 +8,100 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     hostID: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "hostID",
-      references: {
-        key: "id",
-        model: "Users_model"
-      }
     },
     pricePerDay: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "pricePerDay"
+      field: "pricePerDay",
     },
     miscCostPercentage: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "miscCostPercentage"
+      field: "miscCostPercentage",
     },
     address: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "address"
+      field: "address",
     },
     listingDescription: {
       type: DataTypes.STRING(255),
       allowNull: true,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "listingDescription"
+      field: "listingDescription",
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      
-      primaryKey: false,
-      autoIncrement: false,
+      defaultValue: new Date(),
       comment: null,
-      field: "createdAt"
+      field: "createdAt",
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "updatedAt"
+      defaultValue: new Date(),
+      field: "updatedAt",
     },
     avgRating: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "avgRating"
+      field: "avgRating",
     },
     cityId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "cityId",
-      references: {
-        key: "id",
-        model: "city_model"
-      }
+      // references: {
+      //   key: "id",
+      //   model: "city_model",
+      // },
     },
     features: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: null,
       field: "features",
-      references: {
-        key: "id",
-        model: "Features_model"
-      }
-    }
+      // references: {
+      //   key: "id",
+      //   model: "Features_model",
+      // },
+    },
   };
   const options = {
     tableName: "Listings",
-    comment: "",
-    indexes: [{
-      name: "Listings_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["hostID"]
-    }, {
-      name: "Listings_fk1",
-      unique: false,
-      type: "BTREE",
-      fields: ["cityId"]
-    }, {
-      name: "Listings_fk2",
-      unique: false,
-      type: "BTREE",
-      fields: ["features"]
-    }]
   };
   const ListingsModel = sequelize.define("Listings_model", attributes, options);
   return ListingsModel;
