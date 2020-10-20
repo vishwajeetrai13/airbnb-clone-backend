@@ -3,8 +3,8 @@ const faker = require("faker");
 const random = require("lodash").random;
 const times = require("lodash").times;
 var Sequelize = require("sequelize");
-var sequelize = require("../src/config/configDb");
-const db = require("../src/sequelize/indexModel");
+var sequelize = require("../config/configDb");
+const db = require("../model/indexModel");
 
 feedRandomUsers = (numberOFData) => {
   return db.user.bulkCreate(
@@ -86,6 +86,41 @@ feedCountry = (numberOFData) => {
   );
 };
 
+showUser = async () => {
+  console.log(
+    await db.user.findAll({
+      raw: true,
+    })
+  );
+};
+
+showListing = async () => {
+  console.log(
+    await db.listing.findAll({
+      raw: true,
+      include: {
+        model: db.user,
+      },
+    })
+  );
+};
+
+showBooking = async () => {
+  console.log(
+    await db.booking.findAll({
+      raw: true,
+      include: [
+        {
+          model: db.user,
+        },
+        {
+          model: db.listing,
+        },
+      ],
+    })
+  );
+};
+
 async function main() {
   try {
     const numberOFData = 20;
@@ -97,6 +132,9 @@ async function main() {
     await feedRandomListings(numberOFData);
     await feedRandomListingImages(numberOFData);
     await feedBookmark(numberOFData);
+    // showUser();
+    // showListing();
+    // showBooking();
     console.log(
       await db.city.findAll({
         raw: true,

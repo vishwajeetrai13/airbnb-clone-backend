@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
     bookingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
