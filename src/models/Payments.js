@@ -1,8 +1,7 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
+const bookingModel = require("./Booking");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.UUID,
@@ -10,58 +9,56 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: false,
       comment: null,
-      field: "id"
+      field: "id",
     },
     bookingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "bookingId",
       references: {
         key: "id",
-        model: "Booking"
-      }
+        model: "Bookings",
+      },
     },
     TransactionID: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "TransactionID",
-      unique: "TransactionID"
+      unique: "TransactionID",
     },
     totalPaymentAmount: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "totalPaymentAmount"
+      field: "totalPaymentAmount",
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "createdAt"
+      field: "createdAt",
     },
     PaymentStatus: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "PaymentStatus"
-    }
+      field: "PaymentStatus",
+    },
   };
 
   const PaymentsModel = sequelize.define("Payments", attributes);

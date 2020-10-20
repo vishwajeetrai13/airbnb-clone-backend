@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,112 +8,112 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     hostID: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "hostID",
       references: {
         key: "id",
-        model: "Users"
-      }
+        model: "Users",
+      },
     },
     pricePerDay: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "pricePerDay"
+      field: "pricePerDay",
     },
     miscCostPercentage: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "miscCostPercentage"
+      field: "miscCostPercentage",
     },
     address: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "address"
+      field: "address",
     },
     listingDescription: {
       type: DataTypes.STRING(255),
       allowNull: true,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "listingDescription"
+      field: "listingDescription",
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "createdAt"
+      field: "createdAt",
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "updatedAt"
+      field: "updatedAt",
     },
     avgRating: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "avgRating"
+      field: "avgRating",
     },
     cityId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "cityId",
       references: {
         key: "id",
-        model: "city"
-      }
+        model: "city",
+      },
     },
     features: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "features",
       references: {
         key: "id",
-        model: "Features"
-      }
-    }
+        model: "Features",
+      },
+    },
   };
- 
-  const ListingsModel = sequelize.define("Listings", attributes,);
+
+  const ListingsModel = sequelize.define("Listings", attributes);
   return ListingsModel;
 };

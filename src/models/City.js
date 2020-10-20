@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,32 +8,32 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     cityName: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "cityName"
+      field: "cityName",
     },
     stateId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      
+
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "stateId",
       references: {
         key: "id",
-        model: "state"
-      }
-    }
+        model: "state",
+      },
+    },
   };
 
-  const CityModel = sequelize.define("city_model", attributes,);
+  const CityModel = sequelize.define("city", attributes, { tableName: "city" });
   return CityModel;
 };
