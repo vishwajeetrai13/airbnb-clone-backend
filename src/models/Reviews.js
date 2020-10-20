@@ -22,7 +22,7 @@ module.exports = sequelize => {
       field: "bookingId",
       references: {
         key: "id",
-        model: "Booking_model"
+        model: "Booking"
       }
     },
     description: {
@@ -62,16 +62,7 @@ module.exports = sequelize => {
       field: "byHost"
     }
   };
-  const options = {
-    tableName: "Reviews",
-    comment: "",
-    indexes: [{
-      name: "Reviews_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["bookingId"]
-    }]
-  };
-  const ReviewsModel = sequelize.define("Reviews_model", attributes, options);
+
+  const ReviewsModel = sequelize.define("Reviews", attributes,);
   return ReviewsModel;
 };

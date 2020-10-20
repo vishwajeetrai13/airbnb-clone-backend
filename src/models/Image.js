@@ -22,7 +22,7 @@ module.exports = sequelize => {
       field: "entityId",
       references: {
         key: "id",
-        model: "Listings_model"
+        model: "Listings"
       }
     },
     url: {
@@ -44,16 +44,7 @@ module.exports = sequelize => {
       field: "alt"
     }
   };
-  const options = {
-    tableName: "Image",
-    comment: "",
-    indexes: [{
-      name: "Image_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["entityId"]
-    }]
-  };
-  const ImageModel = sequelize.define("Image_model", attributes, options);
+
+  const ImageModel = sequelize.define("Image", attributes, );
   return ImageModel;
 };

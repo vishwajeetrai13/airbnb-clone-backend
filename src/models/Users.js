@@ -86,11 +86,7 @@ module.exports = sequelize => {
       field: "profilePictureUrl"
     }
   };
-  const options = {
-    tableName: "Users",
-    comment: "",
-    indexes: []
-  };
-  const UsersModel = sequelize.define("Users_model", attributes, options);
+
+  const UsersModel = sequelize.define("Users", attributes,);
   return UsersModel;
 };

@@ -21,11 +21,7 @@ module.exports = sequelize => {
       field: "countryName"
     }
   };
-  const options = {
-    tableName: "country",
-    comment: "",
-    indexes: []
-  };
-  const CountryModel = sequelize.define("country_model", attributes, options);
+
+  const CountryModel = sequelize.define("country", attributes,);
   return CountryModel;
 };

@@ -15,45 +15,29 @@ module.exports = sequelize => {
     listingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "listingId",
       references: {
         key: "id",
-        model: "Listings_model"
+        model: "Listings"
       }
     },
     userId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "userId",
       references: {
         key: "id",
-        model: "Users_model"
+        model: "Users"
       }
     }
   };
-  const options = {
-    tableName: "bookmark",
-    comment: "",
-    indexes: [{
-      name: "bookmark_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["listingId"]
-    }, {
-      name: "bookmark_fk1",
-      unique: false,
-      type: "BTREE",
-      fields: ["userId"]
-    }]
-  };
-  const BookmarkModel = sequelize.define("bookmark_model", attributes, options);
+
+  const BookmarkModel = sequelize.define("bookmark", attributes);
   return BookmarkModel;
 };

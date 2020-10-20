@@ -22,7 +22,7 @@ module.exports = sequelize => {
       field: "userId",
       references: {
         key: "id",
-        model: "Users_model"
+        model: "Users"
       }
     },
     listingId: {
@@ -35,7 +35,7 @@ module.exports = sequelize => {
       field: "listingId",
       references: {
         key: "id",
-        model: "Listings_model"
+        model: "Listings"
       }
     },
     checkinDate: {
@@ -84,21 +84,7 @@ module.exports = sequelize => {
       field: "totalCost"
     }
   };
-  const options = {
-    tableName: "Booking",
-    comment: "",
-    indexes: [{
-      name: "Booking_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["userId"]
-    }, {
-      name: "Booking_fk1",
-      unique: false,
-      type: "BTREE",
-      fields: ["listingId"]
-    }]
-  };
-  const BookingModel = sequelize.define("Booking_model", attributes, options);
+ 
+  const BookingModel = sequelize.define("Booking", attributes,);
   return BookingModel;
 };

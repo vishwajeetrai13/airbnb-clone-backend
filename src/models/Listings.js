@@ -22,7 +22,7 @@ module.exports = sequelize => {
       field: "hostID",
       references: {
         key: "id",
-        model: "Users_model"
+        model: "Users"
       }
     },
     pricePerDay: {
@@ -98,7 +98,7 @@ module.exports = sequelize => {
       field: "cityId",
       references: {
         key: "id",
-        model: "city_model"
+        model: "city"
       }
     },
     features: {
@@ -111,30 +111,11 @@ module.exports = sequelize => {
       field: "features",
       references: {
         key: "id",
-        model: "Features_model"
+        model: "Features"
       }
     }
   };
-  const options = {
-    tableName: "Listings",
-    comment: "",
-    indexes: [{
-      name: "Listings_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["hostID"]
-    }, {
-      name: "Listings_fk1",
-      unique: false,
-      type: "BTREE",
-      fields: ["cityId"]
-    }, {
-      name: "Listings_fk2",
-      unique: false,
-      type: "BTREE",
-      fields: ["features"]
-    }]
-  };
-  const ListingsModel = sequelize.define("Listings_model", attributes, options);
+ 
+  const ListingsModel = sequelize.define("Listings", attributes,);
   return ListingsModel;
 };

@@ -22,7 +22,7 @@ module.exports = sequelize => {
       field: "bookingId",
       references: {
         key: "id",
-        model: "Booking_model"
+        model: "Booking"
       }
     },
     TransactionID: {
@@ -63,16 +63,7 @@ module.exports = sequelize => {
       field: "PaymentStatus"
     }
   };
-  const options = {
-    tableName: "Payments",
-    comment: "",
-    indexes: [{
-      name: "Payments_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["bookingId"]
-    }]
-  };
-  const PaymentsModel = sequelize.define("Payments_model", attributes, options);
+
+  const PaymentsModel = sequelize.define("Payments", attributes);
   return PaymentsModel;
 };

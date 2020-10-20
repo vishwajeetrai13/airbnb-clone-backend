@@ -36,12 +36,14 @@ for (let model of models) {
 // console.log(sequelize.models) // after the above step, the models generated are available which can be then used to query
 
 
+sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true }).then(()=>{
+  sequelize.sync({force:true}).then(()=>{
+    console.log('table created in memory')
+    // logic to Migrate/ dump data 
+    // to the DB shall go here, this just created the table in the DB
+  }).catch(error=>console.error(error))
+})
 
-sequelize.sync({force:true}).then(()=>{
-  console.log('table created in memory')
-  // logic to Migrate/ dump data 
-  // to the DB shall go here, this just created the table in the DB
-}).catch(error=>console.error(error))
 
 
 

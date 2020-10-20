@@ -31,20 +31,11 @@ module.exports = sequelize => {
       field: "stateId",
       references: {
         key: "id",
-        model: "state_model"
+        model: "state"
       }
     }
   };
-  const options = {
-    tableName: "city",
-    comment: "",
-    indexes: [{
-      name: "city_fk0",
-      unique: false,
-      type: "BTREE",
-      fields: ["stateId"]
-    }]
-  };
-  const CityModel = sequelize.define("city_model", attributes, options);
+
+  const CityModel = sequelize.define("city_model", attributes,);
   return CityModel;
 };

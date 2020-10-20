@@ -69,11 +69,7 @@ module.exports = sequelize => {
       field: "amenities"
     }
   };
-  const options = {
-    tableName: "Features",
-    comment: "",
-    indexes: []
-  };
-  const FeaturesModel = sequelize.define("Features_model", attributes, options);
+ 
+  const FeaturesModel = sequelize.define("Features", attributes,);
   return FeaturesModel;
 };
