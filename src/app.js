@@ -1,9 +1,15 @@
 const express = require("express");
 var cors = require("cors");
-let bodyParser=require('body-parser');  
-// listingRouteSample = require("./routes/listingRoute").listingRouteSample;
-import { listingRouteSample } from "./routes/listingRoute";
-let bookingRouteSample = require("./routes/bookingRoute").bookingRouteSample;
+
+let bodyParser = require("body-parser");
+
+const listingRoutes = require("./routes/listingRoutes");
+
+const bookingRoutes = require("./routes/bookingRoutes");
+
+const authenticationRoutes = require("./routes/authenticationRoutes");
+
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -19,18 +25,15 @@ app.set("port", process.env.PORT || 8000);
 app.set("env", process.env.NODE_ENV || "development");
 
 app.get("/", function (req, res) {
-  // res.redirect('/api/v1/')
-  res.send("GET request to the homepage");
+  res.redirect("/api/v1/auth/signup");
 });
 
-app.get("/booking", function (req, res) {
-  bookingRouteSample();
-  res.send("booking");
-});
+app.use("/api/v1/listings", listingRoutes);
 
-app.get("/listing", function (req, res) {
-  listingRouteSample();
-  res.send("listing");
-});
+app.use("/api/v1/auth", authenticationRoutes);
+
+app.use("/api/v1/bookings", bookingRoutes);
+
+app.use("/api/v1/users", userRoutes);
 
 module.exports = app;
