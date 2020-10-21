@@ -25,7 +25,8 @@ app.set("port", process.env.PORT || 8000);
 app.set("env", process.env.NODE_ENV || "development");
 
 app.get("/", function (req, res) {
-  res.redirect("/api/v1/auth/signup");
+  // res.redirect("/api/v1/auth/signup");
+  res.send('welcome to the homepage');
 });
 
 app.use("/api/v1/listings", listingRoutes);
