@@ -10,32 +10,26 @@ module.exports = (sequelize) => {
       comment: null,
       field: "id",
     },
-    stateName: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "stateName",
-    },
-    countryId: {
+    listingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "countryId",
-      references: {
-        key: "id",
-        model: "country",
-      },
+      field: "listingId",
+    },
+    userId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "userId",
     },
   };
-
-  const StateModel = sequelize.define("state", attributes, {
-    tableName: "state",
-  });
-  return StateModel;
+  const options = {
+    tableName: "bookmark",
+  };
+  const BookmarkModel = sequelize.define("bookmark_model", attributes, options);
+  return BookmarkModel;
 };

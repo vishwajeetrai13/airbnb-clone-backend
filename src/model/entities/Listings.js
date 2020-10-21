@@ -13,15 +13,10 @@ module.exports = (sequelize) => {
     hostID: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "hostID",
-      references: {
-        key: "id",
-        model: "Users",
-      },
     },
     pricePerDay: {
       type: DataTypes.INTEGER(11),
@@ -62,19 +57,14 @@ module.exports = (sequelize) => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-
-      primaryKey: false,
-      autoIncrement: false,
+      defaultValue: new Date(),
       comment: null,
       field: "createdAt",
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
+      defaultValue: new Date(),
       field: "updatedAt",
     },
     avgRating: {
@@ -94,24 +84,24 @@ module.exports = (sequelize) => {
       autoIncrement: false,
       comment: null,
       field: "cityId",
-      references: {
-        key: "id",
-        model: "city",
-      },
+      // references: {
+      //   key: "id",
+      //   model: "city_model",
+      // },
     },
     features: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: null,
       field: "features",
-      references: {
-        key: "id",
-        model: "Features",
-      },
+      // references: {
+      //   key: "id",
+      //   model: "Features_model",
+      // },
     },
+  };
+  const options = {
+    tableName: "Listings",
   };
 
   const ListingsModel = sequelize.define("Listings", attributes);

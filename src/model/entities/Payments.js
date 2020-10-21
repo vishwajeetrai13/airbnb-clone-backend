@@ -1,5 +1,4 @@
-const { DataTypes } = require("sequelize");
-const bookingModel = require("./Booking");
+const { DataTypes, NOW } = require("sequelize");
 
 module.exports = (sequelize) => {
   const attributes = {
@@ -14,15 +13,10 @@ module.exports = (sequelize) => {
     bookingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "bookingId",
-      references: {
-        key: "id",
-        model: "Bookings",
-      },
     },
     TransactionID: {
       type: DataTypes.STRING(255),
@@ -44,21 +38,23 @@ module.exports = (sequelize) => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
+      defaultValue: NOW,
       field: "createdAt",
     },
     PaymentStatus: {
       type: DataTypes.STRING(255),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "PaymentStatus",
     },
+  };
+  const options = {
+    tableName: "Payments",
   };
 
   const PaymentsModel = sequelize.define("Payments", attributes);

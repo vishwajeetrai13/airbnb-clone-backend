@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
+module.exports = (sequelize) => {
   const attributes = {
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,7 +8,7 @@ module.exports = sequelize => {
       primaryKey: true,
       autoIncrement: true,
       comment: null,
-      field: "id"
+      field: "id",
     },
     typeofListing: {
       type: DataTypes.STRING(100),
@@ -18,7 +16,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "typeofListing"
+      field: "typeofListing",
     },
     bedrooms: {
       type: DataTypes.INTEGER(11),
@@ -26,7 +24,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "bedrooms"
+      field: "bedrooms",
     },
     bathrooms: {
       type: DataTypes.INTEGER(11),
@@ -34,7 +32,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "bathrooms"
+      field: "bathrooms",
     },
     beds: {
       type: DataTypes.INTEGER(11),
@@ -42,7 +40,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "beds"
+      field: "beds",
     },
     maxOccupants: {
       type: DataTypes.INTEGER(11),
@@ -50,7 +48,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "maxOccupants"
+      field: "maxOccupants",
     },
     policies: {
       type: DataTypes.JSON,
@@ -58,7 +56,7 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "policies"
+      field: "policies",
     },
     amenities: {
       type: DataTypes.JSON,
@@ -66,10 +64,12 @@ module.exports = sequelize => {
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "amenities"
-    }
+      field: "amenities",
+    },
   };
- 
-  const FeaturesModel = sequelize.define("Features", attributes,);
+  const options = {
+    tableName: "Features",
+  };
+  const FeaturesModel = sequelize.define("Features_model", attributes, options);
   return FeaturesModel;
 };

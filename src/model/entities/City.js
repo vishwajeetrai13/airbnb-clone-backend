@@ -27,11 +27,10 @@ module.exports = (sequelize) => {
       autoIncrement: false,
       comment: null,
       field: "stateId",
-      references: {
-        key: "id",
-        model: "state",
-      },
     },
+  };
+  const options = {
+    tableName: "city",
   };
 
   const CityModel = sequelize.define("city", attributes, { tableName: "city" });
