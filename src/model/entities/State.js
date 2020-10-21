@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     },
   };
 
-  const StateModel = sequelize.define("state", attributes, {
+  const options = {
     tableName: "state",
   };
   const StateModel = sequelize.define("state_model", attributes, options);

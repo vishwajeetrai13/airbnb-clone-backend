@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
     },
   };
 
-  const CountryModel = sequelize.define("country", attributes, {
+  const options = {
     tableName: "country",
   };
   const CountryModel = sequelize.define("country_model", attributes, options);
