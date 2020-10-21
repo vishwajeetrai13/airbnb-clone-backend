@@ -123,7 +123,7 @@ showBooking = async () => {
 
 async function main() {
   try {
-    const numberOFData = 20;
+    const numberOFData = 100;
     await sequelize.sync({ force: true });
     await feedCountry(numberOFData);
     await feedState(numberOFData);
@@ -132,20 +132,23 @@ async function main() {
     await feedRandomListings(numberOFData);
     await feedRandomListingImages(numberOFData);
     await feedBookmark(numberOFData);
+
+    // TODO : need to add feeder for Bookings,Reviews,Payments
+
     // showUser();
     // showListing();
     // showBooking();
-    console.log(
-      await db.city.findAll({
-        raw: true,
-        include: [
-          {
-            model: db.state,
-            include: [{ model: db.country }],
-          },
-        ],
-      })
-    );
+    // console.log(
+    //   await db.city.findAll({
+    //     raw: true,
+    //     include: [
+    //       {
+    //         model: db.state,
+    //         include: [{ model: db.country }],
+    //       },
+    //     ],
+    //   })
+    // );
   } catch (error) {
     console.log(error);
   }

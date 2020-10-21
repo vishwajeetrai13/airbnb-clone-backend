@@ -1,5 +1,6 @@
 const express = require("express");
 var cors = require("cors");
+let bodyParser=require('body-parser');  
 // listingRouteSample = require("./routes/listingRoute").listingRouteSample;
 import { listingRouteSample } from "./routes/listingRoute";
 let bookingRouteSample = require("./routes/bookingRoute").bookingRouteSample;
@@ -14,10 +15,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 8000);
 app.set("env", process.env.NODE_ENV || "development");
 
 app.get("/", function (req, res) {
+  // res.redirect('/api/v1/')
   res.send("GET request to the homepage");
 });
 
