@@ -1,5 +1,5 @@
 const {Op}=require('sequelize');
-const { listing } = require('../model/indexModel');
+// const { listing } = require('../model/indexModel');
 const db=require('../model/indexModel');
 
 

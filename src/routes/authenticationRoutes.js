@@ -4,10 +4,10 @@ const controller=require('../controllers/authController')
 const router=express.Router();
 
 // for signing up the first time
-router.get('/signup',controller.signup);
+router.post('/signup',controller.signup);
 
-// for regular signin
-router.get('/signin',controller.signin);
+// to login for a user who's already signed in
+router.post('/login',controller.login);
 
 // for signing out
 router.get('/signout',controller.signout);
