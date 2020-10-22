@@ -14,12 +14,21 @@ const search=async (req,res)=>{
   }
   else{
     
-    const listings=await db.listing.findAll({
-      where:{
-        cityId:db.sequelize.literal(`cityId in (select id from city where cityName='${req.query.city}')`)
-        }
+    // const listings=await db.listing.findAll({
+    //   where:{
+    //     cityId:db.sequelize.literal(`cityId in (select id from city where cityName='${req.query.city}')`)
+    //     }
       
-    })
+    // })
+    const listings=await db.listing.findAll({
+      include: {
+        model: db.city,
+        attributes: ["cityName"],
+        where: {
+          cityName: req.query.city,
+        },
+      },
+    });
     
     if (listings.length==0){
     res.status(200).send('we are not yet operational in this city');  
