@@ -1,5 +1,6 @@
 const { fake } = require("faker");
 const faker = require("faker");
+const { number } = require("joi");
 const random = require("lodash").random;
 const times = require("lodash").times;
 var Sequelize = require("sequelize");
@@ -43,13 +44,16 @@ feedRandomListings = (numberOFData) => {
   );
 };
 
-feedRandomListingImages = (numberOFData) => {
-  return db.listingImage.bulkCreate(
-    times(numberOFData, () => ({
-      entityId: random(1, numberOFData),
-      url: faker.image.imageUrl(),
-    }))
-  );
+const feedRandomListingImages = async (numberOFData) => {
+  let numberOfImages = 5;
+  for (let i = 1; i <= numberOFData; i++) {
+    await db.listingImage.bulkCreate(
+      times(numberOfImages, () => ({
+        entityId: i,
+        url: faker.image.imageUrl(),
+      }))
+    );
+  }
 };
 
 feedBookmark = (numberOFData) => {
@@ -123,7 +127,7 @@ showBooking = async () => {
 
 async function main() {
   try {
-    const numberOFData = 100;
+    const numberOFData = 10;
     await sequelize.sync({ force: true });
     await feedCountry(numberOFData);
     await feedState(numberOFData);
