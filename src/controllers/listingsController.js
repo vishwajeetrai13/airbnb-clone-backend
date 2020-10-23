@@ -94,15 +94,18 @@ const findById=async (req,res)=>{
             listingId:listing.id
           }
         })
-        // const review=await db.review.findAll({
-        //   where:{
-        //     listing
-        //   }
-        // })
+
+        const review=await Promise.all(booking.map(async booking => {
+          return await db.review.findAll({
+          where:{
+            bookingId:booking.id
+          }
+        });
+      }));
 
      const deepClone=(entity)=> JSON.parse(JSON.stringify(entity));
         
-        let resObj={listing:deepClone(listing),city:deepClone(city),host:deepClone(host),images:deepClone(images)}
+        let resObj={listing:deepClone(listing),city:deepClone(city),host:deepClone(host),images:deepClone(images),bookings:deepClone(booking),revieiw:deepClone(review)}
       res.status(200).send(resObj);
     
     }
