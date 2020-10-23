@@ -152,7 +152,7 @@ showBooking = async () => {
 
 async function main() {
   try {
-    const numberOFData = 10;
+    const numberOFData = 500;
     await sequelize.sync({ force: true });
     await feedCountry(numberOFData);
     await feedState(numberOFData);
@@ -163,7 +163,7 @@ async function main() {
     await feedBookmark(numberOFData);
     await feedBooking(numberOFData);
     await feedReview(numberOFData);
-    // TODO : need to add feeder for Bookings,Reviews,Payments
+    // TODO : need to add feeder for Payments
 
     // showUser();
     // showListing();
