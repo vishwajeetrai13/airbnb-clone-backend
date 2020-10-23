@@ -1,7 +1,4 @@
-const {Op}=require('sequelize');
-// const { listing } = require('../model/indexModel');
 const db=require('../model/indexModel');
-
 
 
 const search=async (req,res)=>{
@@ -14,12 +11,6 @@ const search=async (req,res)=>{
   }
   else{
     
-    // const listings=await db.listing.findAll({
-    //   where:{
-    //     cityId:db.sequelize.literal(`cityId in (select id from city where cityName='${req.query.city}')`)
-    //     }
-      
-    // })
     const listings=await db.listing.findAll({
       include: {
         model: db.city,
@@ -29,18 +20,37 @@ const search=async (req,res)=>{
         },
       },
     });
-    
+
     if (listings.length==0){
     res.status(200).send('we are not yet operational in this city');  
   }
 
-  res.status(200).send(listings);
+  const images= await Promise.all(listings.map(async (listing) =>{
+    return await db.listingImage.findAll({
+      attributes:['url'],
+      where:{
+        entityId:listing.id
+      }
+    }); 
+}));
+
+const listingsAndImages=[];
+
+for(let i=0;i<listings.length;i++){
+  let listingCopy=JSON.parse(JSON.stringify(listings));
+  listingCopy[i].images=images[i]
+  listingsAndImages.push(listingCopy[i]);
+}
+
+  res.status(200).send(listingsAndImages);
+
 }
   }
 catch(err){
   console.error(err);
 }
 };
+
 
 const findById=async (req,res)=>{
     try{
@@ -52,15 +62,48 @@ const findById=async (req,res)=>{
 
         const listing=await db.listing.findOne({
           where:{
-            id:req.params.id
+            id:Number(req.params.id),      
+          },
+        });
+        
+        if(!listing){
+         return res.status(400).send(`No Listings exist for this entry`);
+        }
+
+        const city=await db.city.findOne({
+          where:{
+            id:listing.cityId,
+          }
+        });
+
+        const host=await db.user.findAll({
+          where:{
+            id:listing.hostID,
+          }
+        });
+
+        const images=await db.listingImage.findAll({
+          attributes:['url'],
+          where:{
+            entityId:listing.id,
+          }
+        });
+
+        const booking=await db.booking.findAll({
+          where:{
+            listingId:listing.id
           }
         })
+        // const review=await db.review.findAll({
+        //   where:{
+        //     listing
+        //   }
+        // })
 
-        if(!listing){
-        res.status(400).send(`No Listings exist for this entry`);
-      }
-    
-      res.status(200).send(listing);
+     const deepClone=(entity)=> JSON.parse(JSON.stringify(entity));
+        
+        let resObj={listing:deepClone(listing),city:deepClone(city),host:deepClone(host),images:deepClone(images)}
+      res.status(200).send(resObj);
     
     }
 
