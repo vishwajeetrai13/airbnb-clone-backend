@@ -13,7 +13,7 @@ const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-app.options("*", cors());
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
