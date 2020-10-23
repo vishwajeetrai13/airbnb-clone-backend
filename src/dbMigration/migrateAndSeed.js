@@ -1,9 +1,7 @@
-const { fake } = require("faker");
 const faker = require("faker");
-const { number } = require("joi");
 const random = require("lodash").random;
 const times = require("lodash").times;
-var Sequelize = require("sequelize");
+
 var sequelize = require("../config/configDb");
 const db = require("../model/indexModel");
 
