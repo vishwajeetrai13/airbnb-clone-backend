@@ -108,4 +108,14 @@ module.exports = (db) => {
     foreignKey: "bookingId",
     targetKey: "id",
   });
+
+  // booking->review
+  db.booking.hasMany(db.review, {
+    foreignKey: "bookingId",
+    sourceKey: "id",
+  });
+  db.review.belongsTo(db.booking, {
+    foreignKey: "bookingId",
+    targetKey: "id",
+  });
 };

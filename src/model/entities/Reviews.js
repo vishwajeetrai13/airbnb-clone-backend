@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
     bookingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -29,9 +28,8 @@ module.exports = (sequelize) => {
       field: "description",
     },
     rating: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.FLOAT(11),
       allowNull: false,
-
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -40,7 +38,7 @@ module.exports = (sequelize) => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-
+      defaultValue: new Date(),
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -49,9 +47,7 @@ module.exports = (sequelize) => {
     byHost: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "0",
-      primaryKey: false,
-      autoIncrement: false,
+      defaultValue: false,
       comment: null,
       field: "byHost",
     },

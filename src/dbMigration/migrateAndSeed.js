@@ -1,5 +1,6 @@
 const { fake } = require("faker");
 const faker = require("faker");
+const { number } = require("joi");
 const random = require("lodash").random;
 const times = require("lodash").times;
 var Sequelize = require("sequelize");
@@ -43,13 +44,16 @@ feedRandomListings = (numberOFData) => {
   );
 };
 
-feedRandomListingImages = (numberOFData) => {
-  return db.listingImage.bulkCreate(
-    times(numberOFData, () => ({
-      entityId: random(1, numberOFData),
-      url: faker.image.imageUrl(),
-    }))
-  );
+const feedRandomListingImages = async (numberOFData) => {
+  let numberOfImages = 5;
+  for (let i = 1; i <= numberOFData; i++) {
+    await db.listingImage.bulkCreate(
+      times(numberOfImages, () => ({
+        entityId: i,
+        url: faker.image.imageUrl(),
+      }))
+    );
+  }
 };
 
 feedBookmark = (numberOFData) => {
@@ -82,6 +86,31 @@ feedCountry = (numberOFData) => {
   return db.country.bulkCreate(
     times(numberOFData, () => ({
       countryName: faker.address.country(),
+    }))
+  );
+};
+
+feedBooking = async (numberOFData) => {
+  for (let i = 0; i < numberOFData; i++) {
+    currDate = faker.date.recent();
+    let futureDate = new Date();
+    futureDate.setDate(currDate.getDate() + random(4, 10));
+    await db.booking.create({
+      userId: random(1, numberOFData),
+      listingId: random(1, numberOFData),
+      checkinDate: currDate,
+      checkoutDate: futureDate,
+      totalCost: random(1000, 10000),
+    });
+  }
+};
+
+feedReview = async (numberOFData) => {
+  return db.review.bulkCreate(
+    times(numberOFData, () => ({
+      bookingId: random(1, numberOFData),
+      description: faker.lorem.sentence(),
+      rating: random(1, 5, true),
     }))
   );
 };
@@ -123,7 +152,7 @@ showBooking = async () => {
 
 async function main() {
   try {
-    const numberOFData = 100;
+    const numberOFData = 500;
     await sequelize.sync({ force: true });
     await feedCountry(numberOFData);
     await feedState(numberOFData);
@@ -132,8 +161,9 @@ async function main() {
     await feedRandomListings(numberOFData);
     await feedRandomListingImages(numberOFData);
     await feedBookmark(numberOFData);
-
-    // TODO : need to add feeder for Bookings,Reviews,Payments
+    await feedBooking(numberOFData);
+    await feedReview(numberOFData);
+    // TODO : need to add feeder for Payments
 
     // showUser();
     // showListing();

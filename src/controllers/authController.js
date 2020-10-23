@@ -143,3 +143,5 @@ module.exports = {
     login,
     signout
 };
+
+// TODO Add jwt to cookie and see if implementing refresh token is possible
