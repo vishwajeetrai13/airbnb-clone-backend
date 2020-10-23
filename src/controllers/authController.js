@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
-
 const signupValidationSchema= Joi.object({
     firstName: Joi.string().alphanum().max(15).min(3).required(),
     lastName: Joi.string().alphanum().max(15).min(3).required(),
@@ -12,7 +11,7 @@ const signupValidationSchema= Joi.object({
         minDomainSegments: 2
     }).required(),
     password: Joi.string().min(10).required(),
-    dob: Joi.string().min(15),
+    dob: Joi.string().min(10),
 });
 
 const loginValidationSchema=Joi.object({
@@ -23,15 +22,15 @@ const loginValidationSchema=Joi.object({
 });
 
 // validity in secs
-// const maxAge = 3 * 24 * 60 * 60;
+const maxAge = 3 * 24 * 60 * 60;
 
 
-const createToken = id => {
+const createToken = (id,firstName) => {
     // let options = {
     //     expiresIn: maxAge,
     // };
     return jwt.sign({
-        id
+        id,firstName
     }, process.env.TOKEN_SECRET, /*options*/);
 };
 
@@ -84,18 +83,19 @@ const signup = async (req, res) => {
         const record = await db.user.build(user).save();
        
         // create and assign a token
-        const {id}=record;
-       const token = createToken(id);
+        const id=record.id;
+        const firstName=record.firstName;
+       const token = createToken(id,firstName);
 
-       res.header('auth-token',token);
+        res.cookie('access_token',token,{
+            maxAge,
+            httpOnly:true,
+            secure:true
+        })
        
-       res.sendStatus(201).send({
-            id
-        });
+        res.status(201).send({id});
     } catch (err) {
-        res.status(400).send({
-            err: err
-        });
+        res.status(400).send({error:err});
     }
 };
 
@@ -122,21 +122,31 @@ const login = async (req, res) => {
     try {
         // create and assign a token
 
-        const token =createToken(user.id);
+        const token =createToken(user.id,user.firstName);
 
-        res.header('auth-token',token).send('Signed In !!');
+        res.cookie('access_token',token,{
+            maxAge,
+            httpOnly:true,
+            secure:true
+        })
+       
+        res.status(201).send({success:'signed In'});
 
     } catch (error) {
         console.error(error);
     }
 
-    res.status(200).send(`this is the auth/signin route`);
 };
 
 const signout = (req, res) => {
 
-    res.header('auth-token',null)
-    res.status(200).send(`Logged Out !!`);
+    res.cookie('access_token','',{
+        maxAge:1,
+        httpOnly:true,
+        secure:true
+    })
+   
+    res.status(200).send({success:`Logged Out !!`});
 };
 module.exports = {
     signup,
@@ -144,4 +154,3 @@ module.exports = {
     signout
 };
 
-// TODO Add jwt to cookie and see if implementing refresh token is possible
