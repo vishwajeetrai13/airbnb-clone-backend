@@ -49,9 +49,7 @@ module.exports = (sequelize) => {
     byHost: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "0",
-      primaryKey: false,
-      autoIncrement: false,
+      defaultValue: false,
       comment: null,
       field: "byHost",
     },
