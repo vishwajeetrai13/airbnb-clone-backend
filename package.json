@@ -41,5 +41,8 @@
     "@babel/preset-env": "^7.12.1",
     "nodemon": "^2.0.5",
     "sequelize-cli": "^6.2.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
