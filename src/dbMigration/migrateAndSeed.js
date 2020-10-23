@@ -90,6 +90,31 @@ feedCountry = (numberOFData) => {
   );
 };
 
+feedBooking = async (numberOFData) => {
+  for (let i = 0; i < numberOFData; i++) {
+    currDate = faker.date.recent();
+    let futureDate = new Date();
+    futureDate.setDate(currDate.getDate() + random(4, 10));
+    await db.booking.create({
+      userId: random(1, numberOFData),
+      listingId: random(1, numberOFData),
+      checkinDate: currDate,
+      checkoutDate: futureDate,
+      totalCost: random(1000, 10000),
+    });
+  }
+};
+
+feedReview = async (numberOFData) => {
+  return db.review.bulkCreate(
+    times(numberOFData, () => ({
+      bookingId: random(1, numberOFData),
+      description: faker.lorem.sentence(),
+      rating: random(1, 5, true),
+    }))
+  );
+};
+
 showUser = async () => {
   console.log(
     await db.user.findAll({
@@ -136,7 +161,8 @@ async function main() {
     await feedRandomListings(numberOFData);
     await feedRandomListingImages(numberOFData);
     await feedBookmark(numberOFData);
-
+    await feedBooking(numberOFData);
+    await feedReview(numberOFData);
     // TODO : need to add feeder for Bookings,Reviews,Payments
 
     // showUser();
