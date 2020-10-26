@@ -19,8 +19,9 @@ const create = async (req, res) => {
     }
     const totalCost = await bookingLibs.calculateTotalCost(data);
     if (totalCost < 100) {
-      res.status(400).send({ err: "invalid dates" });
+      return res.status(400).send({ err: "invalid dates" });
     }
+    console.log("yes");
     const bookingData = await db.booking.build({ ...data, totalCost }).save();
     res.status(200).send(bookingData);
   } catch (err) {
