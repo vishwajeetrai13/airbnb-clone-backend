@@ -11,5 +11,12 @@ module.exports = new Sequelize(
     define: {
       timestamps: false,
     },
+    pool: {
+      max: 10,
+      min: 0,
+      idle: 20000,
+      // @note https://github.com/sequelize/sequelize/issues/8133#issuecomment-359993057
+      acquire: 1000000,
+    },
   }
 );

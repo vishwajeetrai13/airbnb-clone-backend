@@ -3,11 +3,17 @@ var cors = require("cors");
 
 let bodyParser = require("body-parser");
 
+const bookingMiddleware = require("./middlewares/validationHandler")
+  .bookingValidator;
+const reviewValidation = require("./middlewares/validationHandler")
+  .reviewValidation;
+
 const listingRoutes = require("./routes/listingRoutes");
 
 const bookingRoutes = require("./routes/bookingRoutes");
 
 const authenticationRoutes = require("./routes/authenticationRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
 
 const userRoutes = require("./routes/userRoutes");
 
@@ -26,14 +32,16 @@ app.set("env", process.env.NODE_ENV || "development");
 
 app.get("/", function (req, res) {
   // res.redirect("/api/v1/auth/signup");
-  res.send('welcome to the homepage');
+  res.send("welcome to the homepage");
 });
 
 app.use("/api/v1/listings", listingRoutes);
 
 app.use("/api/v1/auth", authenticationRoutes);
 
-app.use("/api/v1/bookings", bookingRoutes);
+app.use("/api/v1/bookings", bookingMiddleware, bookingRoutes);
+
+app.use("/api/v1/review", reviewValidation, reviewRoutes);
 
 app.use("/api/v1/users", userRoutes);
 

@@ -65,7 +65,6 @@ module.exports = (sequelize) => {
     totalCost: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: DataTypes.FLOAT,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
