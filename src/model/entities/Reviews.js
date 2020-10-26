@@ -13,9 +13,6 @@ module.exports = (sequelize) => {
     bookingId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
       field: "bookingId",
     },
     description: {
@@ -47,7 +44,7 @@ module.exports = (sequelize) => {
     byHost: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: 0,
       comment: null,
       field: "byHost",
     },
