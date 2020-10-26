@@ -1,7 +1,9 @@
 const express = require("express");
 var cors = require("cors");
 
-let bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+
+const cookieParser=require('cookie-parser');
 
 const bookingMiddleware = require("./middlewares/validationHandler")
   .bookingValidator;
@@ -19,10 +21,11 @@ const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-app.options("*", cors());
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));

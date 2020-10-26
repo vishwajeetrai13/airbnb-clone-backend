@@ -1,15 +1,20 @@
 const jwt=require('jsonwebtoken');
 
+
 // this can be used as a middleware in protected routes to add the user-id 
 // information from the jwt payload which can be used to determine the user
 
 module.exports=(req,res,next)=>{
-    const token=req.header('auth-token');
-    if(!token) return res.status(401).send('Access Denied');
+    
+    const token=req.cookies.access_token;
+
+    if(!token) return res.status(401).send({error:'Access Denied'});
 
     try{
         const verified=jwt.verify(token,process.env.TOKEN_SECRET);
-        req.user=verified;
+        // have to decide what data to send back
+        // req.user=verified;
+        res.status(200).json(verified);
         next();
     }catch(err){
         res.status(400).send('Invalid Token');
