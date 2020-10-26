@@ -112,11 +112,16 @@ const findById=async (req,res)=>{
         })
       }));
 
-      let rev=review.map((rev,i)=>{
+      let rev;
+      if(review){
+       rev=review.map((rev,i)=>{
          rev=JSON.parse(JSON.stringify(rev))
         rev[`reviewerInfo`]={firstName:reviewBy[i].firstName,lastName:reviewBy[i].lastName,pic:reviewBy[i].profilePictureUrl}
         return rev;
-      })
+      });
+    }else{
+      rev=review;
+    }
 
 
 
