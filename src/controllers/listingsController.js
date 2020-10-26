@@ -1,3 +1,4 @@
+const { review } = require('../model/indexModel');
 const db=require('../model/indexModel');
 
 
@@ -96,16 +97,32 @@ const findById=async (req,res)=>{
         })
 
         const review=await Promise.all(booking.map(async booking => {
-          return await db.review.findAll({
+          return await db.review.findOne({
           where:{
             bookingId:booking.id
           }
         });
       }));
 
+      const reviewBy=await Promise.all(booking.map(async booking=>{
+        return await db.user.findOne({
+          where:{
+            id:booking.userId
+          }
+        })
+      }));
+
+      let rev=review.map((rev,i)=>{
+         rev=JSON.parse(JSON.stringify(rev))
+        rev[`reviewerInfo`]={firstName:reviewBy[i].firstName,lastName:reviewBy[i].lastName,pic:reviewBy[i].profilePictureUrl}
+        return rev;
+      })
+
+
+
      const deepClone=(entity)=> JSON.parse(JSON.stringify(entity));
         
-        let resObj={listing:deepClone(listing),city:deepClone(city),host:deepClone(host),images:deepClone(images),bookings:deepClone(booking),revieiw:deepClone(review)}
+        let resObj={listing:deepClone(listing),city:deepClone(city),host:deepClone(host),images:deepClone(images),bookings:deepClone(booking),review:deepClone(rev)}
       res.status(200).send(resObj);
     
     }
