@@ -5,7 +5,7 @@ const allCountry = async (req, res) => {
     const allCountyName = await db.country.findAll({
       raw: true,
     });
-    res.status(201).send(allCountyName);
+    res.status(200).send(allCountyName);
   } catch (err) {
     return res.status(400).send({ err: err });
   }
@@ -20,7 +20,7 @@ const allState = async (req, res) => {
         countryId: countryId,
       },
     });
-    res.status(201).send(allStateName);
+    res.status(200).send(allStateName);
   } catch (err) {
     return res.status(400).send({ err: err });
   }
@@ -35,7 +35,7 @@ const allCities = async (req, res) => {
         stateId: stateId,
       },
     });
-    res.status(201).send(allCityName);
+    res.status(200).send(allCityName);
   } catch (err) {
     return res.status(400).send({ err: err });
   }
