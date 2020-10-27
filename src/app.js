@@ -3,7 +3,7 @@ var cors = require("cors");
 
 const bodyParser = require("body-parser");
 
-const cookieParser=require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const bookingMiddleware = require("./middlewares/validationHandler")
   .bookingValidator;
@@ -18,6 +18,8 @@ const authenticationRoutes = require("./routes/authenticationRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 
 const userRoutes = require("./routes/userRoutes");
+
+const utilRoutes = require("./routes/utilRoutes");
 
 const app = express();
 
@@ -47,5 +49,7 @@ app.use("/api/v1/bookings", bookingMiddleware, bookingRoutes);
 app.use("/api/v1/review", reviewValidation, reviewRoutes);
 
 app.use("/api/v1/users", userRoutes);
+
+app.use("/api/v1/utils", utilRoutes);
 
 module.exports = app;
