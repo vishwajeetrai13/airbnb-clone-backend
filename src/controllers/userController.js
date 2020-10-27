@@ -1,16 +1,35 @@
 // import model
-const { user } = require("../model/indexModel");
 const db = require("../model/indexModel");
 
 const userInfo = async (req, res) => {
   try {
     const userId = req.params["id"];
-    const userData = await db.user.findByPk(userId);
-    if (userData) {
-      res.status(200).send(userData);
-    } else {
-      res.status(404).send("user doesn't exist");
+    const userData = await db.user.findOne({
+      raw: true,
+      where: {
+        id: userId,
+      },
+    });
+    if (!userData) {
+      return res.status(400).send("user doesn't exist");
     }
+    const bookingHistory = await db.booking.findAll({
+      raw: true,
+      where: {
+        userId: userId,
+      },
+    });
+
+    const allListing = await db.listing.findAll({
+      raw: true,
+      where: {
+        hostID: userId,
+      },
+    });
+    return res.status(200).send({ ...userData, bookingHistory, allListing });
+    // const { userDate, bookingHistory } = Promise.all([
+    //   db.user.findByPk(userId),
+    // ]);
   } catch (err) {
     res.status(400).send({ err: "something went wrong" });
   }
