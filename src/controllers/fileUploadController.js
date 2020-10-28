@@ -22,7 +22,6 @@ const listingImgUpload = (req, res) => {
     } else {
       // If File not found
       if (req.files === undefined) {
-        console.log("uploadProductsImages Error: No File Selected!");
         res.status(500).json({
           status: "fail",
           message: "Error: No File Selected",
@@ -34,7 +33,6 @@ const listingImgUpload = (req, res) => {
         const images = [];
         for (let i = 0; i < fileArray.length; i++) {
           fileLocation = fileArray[i].location;
-          console.log("filename", fileLocation);
           images.push(fileLocation);
         }
         // Save the file name into database

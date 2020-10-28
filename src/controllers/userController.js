@@ -43,7 +43,6 @@ const userInfo = async (req, res) => {
       const cityData = await utils.getCityStateCountryNameByCityId(listingDetails.cityId)
       const listing={...listingDetails,listingImage,cityData,hostDetail}
       const boo={...booking,listing}
-      // console.log({booking,listingImage,cityData})
       return boo;
     }))
     const allListing = await db.listing.findAll({
@@ -62,7 +61,6 @@ const editUser = async (req, res) => {
   try {
     const userId = req.params["id"];
     await db.user.findByPk(userId).then((result) => {
-      console.log(result);
       if (!result) {
         res.status(404).send({ err: "user doesn't exist" });
       }
@@ -107,7 +105,6 @@ const createUser = async (req, res) => {
         email: data.email,
       },
     });
-    console.log(isUserExist);
     if (isUserExist.length > 0) {
       res.status(400).send("user already exist");
     }

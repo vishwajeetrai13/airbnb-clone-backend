@@ -174,9 +174,9 @@ const create = async (req, res) => {
   }))
     return res.status(201).send({ ...listingCreate, image: imageArray })
   } catch (err) {
+    console.log(err)
     res.status(400).send({err:"something went wrong"})
   }
-  
 };
 
 module.exports = { search, findById,create };
