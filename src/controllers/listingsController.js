@@ -165,7 +165,18 @@ const findById = async (req, res) => {
 // listingImages: (4) ["https://desi-airbnb-clone.s3.ap-south-1.amaz
 
 const create = async (req, res) => {
-  console.log(req.body);
+  try{
+  const listingDetails = req.body.listingDetails;
+  const listingImages = req.body.listingImages;
+  const listingCreate = await db.listing.build(listingDetails).save();
+  const imageArray = await Promise.all(listingImages.map(async(image) => {
+    return await db.listingImage.build({ url: image, entityId: listingCreate.id }).save();
+  }))
+    return res.status(201).send({ ...listingCreate, image: imageArray })
+  } catch (err) {
+    res.status(400).send({err:"something went wrong"})
+  }
+  
 };
 
 module.exports = { search, findById,create };
