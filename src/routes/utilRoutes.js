@@ -14,4 +14,6 @@ router.get("/state/:id", controller.allState);
 // the following is to create the user info
 router.get("/city/:id", controller.allCities);
 
+router.get("/getSignedUrl", controller.getSignedURL);
+
 module.exports = router;

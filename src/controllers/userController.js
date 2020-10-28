@@ -41,10 +41,10 @@ const editUser = async (req, res) => {
     await db.user.findByPk(userId).then((result) => {
       console.log(result);
       if (!result) {
-        res.status(404).send("user doesn't exist");
+        res.status(404).send({ err: "user doesn't exist" });
       }
     });
-    await user.update(req.body, {
+    await db.user.update(req.body, {
       where: { id: userId },
       returning: true,
       plain: true,

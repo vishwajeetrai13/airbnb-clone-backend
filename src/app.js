@@ -21,6 +21,8 @@ const userRoutes = require("./routes/userRoutes");
 
 const utilRoutes = require("./routes/utilRoutes");
 
+const fileUploadRoutes = require("./routes/fileUploadRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -51,5 +53,7 @@ app.use("/api/v1/review", reviewValidation, reviewRoutes);
 app.use("/api/v1/users", userRoutes);
 
 app.use("/api/v1/utils", utilRoutes);
+
+app.use("/api/v1/fileupload", fileUploadRoutes);
 
 module.exports = app;

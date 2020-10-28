@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/vishwajeetrai13/airbnb-clone-backend#readme",
   "dependencies": {
+    "aws-sdk": "^2.779.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
@@ -35,8 +36,12 @@
     "jsonwebtoken": "^8.5.1",
     "loadash": "^1.0.0",
     "lodash": "^4.17.20",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
