@@ -142,7 +142,6 @@ const findById = async (req, res) => {
         review: deepClone(rev),
         // review: deepClone(review),
         // reviewBy:deepClone(reviewBy),
-
       };
       res.status(200).send(resObj);
     }
@@ -151,4 +150,22 @@ const findById = async (req, res) => {
   }
 };
 
-module.exports = { search, findById };
+
+// listingDetails:
+// address: "aaaa"
+// avgRating: 5
+// cityId: "467"
+// features: {beds: 2, bedrooms: 2, policies: {…}, amenities: Array(10), bathrooms: 1, …}
+// hostID: 99
+// listingDescription: "sa"
+// miscCostPercentage: 10
+// pricePerDay: "1000"
+// title: "dadf"
+// __proto__: Object
+// listingImages: (4) ["https://desi-airbnb-clone.s3.ap-south-1.amaz
+
+const create = async (req, res) => {
+  console.log(req.body);
+};
+
+module.exports = { search, findById,create };

@@ -12,5 +12,5 @@ router.get('/search',controller.search);
 
 // this will display all the information for the particular listing for the listing page
 router.get('/:id',controller.findById);
-
+router.post("/", controller.create);
 module.exports=router;

@@ -1,5 +1,6 @@
 // import model
 const db = require("../model/indexModel");
+const utils=require("../libs/utils")
 
 const userInfo = async (req, res) => {
   try {
@@ -13,13 +14,38 @@ const userInfo = async (req, res) => {
     if (!userData) {
       return res.status(400).send("user doesn't exist");
     }
-    const bookingHistory = await db.booking.findAll({
+    const bookingHistoryList = await db.booking.findAll({
       raw: true,
       where: {
         userId: userId,
       },
-    });
-
+    })
+    const bookingHistory=await Promise.all(bookingHistoryList.map(async(booking) => {
+      const listingImage = await db.listingImage.findOne({
+        raw: true, where: {
+          entityId:booking.listingId
+        }
+      })
+      const listingDetails = await db.listing.findOne({
+        raw: true,
+        where: {
+          id:booking.listingId
+        }
+      })
+      const hostDetail = await db.user.findOne({
+        raw: true,
+        attributes:["firstName","lastName"],
+        where: {
+          id:listingDetails.hostID
+        }
+      })
+      
+      const cityData = await utils.getCityStateCountryNameByCityId(listingDetails.cityId)
+      const listing={...listingDetails,listingImage,cityData,hostDetail}
+      const boo={...booking,listing}
+      // console.log({booking,listingImage,cityData})
+      return boo;
+    }))
     const allListing = await db.listing.findAll({
       raw: true,
       where: {
@@ -27,9 +53,6 @@ const userInfo = async (req, res) => {
       },
     });
     return res.status(200).send({ ...userData, bookingHistory, allListing });
-    // const { userDate, bookingHistory } = Promise.all([
-    //   db.user.findByPk(userId),
-    // ]);
   } catch (err) {
     res.status(400).send({ err: "something went wrong" });
   }
