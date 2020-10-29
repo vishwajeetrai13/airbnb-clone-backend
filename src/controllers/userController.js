@@ -39,10 +39,16 @@ const userInfo = async (req, res) => {
           id:listingDetails.hostID
         }
       })
+      const reviewDetail = await db.review.findOne({
+        raw: true,
+        where: {
+          bookingId:booking.id
+        }
+      })
       
       const cityData = await utils.getCityStateCountryNameByCityId(listingDetails.cityId)
       const listing={...listingDetails,listingImage,cityData,hostDetail}
-      const boo={...booking,listing}
+      const boo={...booking,listing,reviewDetail}
       return boo;
     }))
     const allListing = await db.listing.findAll({
@@ -51,8 +57,18 @@ const userInfo = async (req, res) => {
         hostID: userId,
       },
     });
-    return res.status(200).send({ ...userData, bookingHistory, allListing });
+    const hostListing = await Promise.all(allListing.map(async(list) => {
+      const listingImage = await db.listingImage.findOne({
+        raw: true, where: {
+          entityId:list.id
+        }
+      })
+      const cityData = await utils.getCityStateCountryNameByCityId(list.cityId)
+      return ({...list,listingImage,cityData})
+    }))
+    return res.status(200).send({ ...userData, bookingHistory, hostListing });
   } catch (err) {
+    console.log(err)
     res.status(400).send({ err: "something went wrong" });
   }
 };
