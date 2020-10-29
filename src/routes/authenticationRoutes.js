@@ -1,5 +1,6 @@
 const express=require('express');
 const controller=require('../controllers/authController')
+const verifyToken=require('../middlewares/verifyToken')
 
 const router=express.Router();
 

@@ -25,7 +25,19 @@ const fileUploadRoutes = require("./routes/fileUploadRoutes");
 
 const app = express();
 
+// app.use(
+//   cors({
+//     origin: [
+//       // `${process.env.FRONT_URL}`,
+//       'http://localhost:3000',
+//       // 'https://mypage.com',
+//     ],
+//     credentials: true,
+//   })
+// );
+
 app.use(cors());
+app.options('*', cors());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
