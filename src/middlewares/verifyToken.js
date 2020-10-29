@@ -12,9 +12,8 @@ module.exports=(req,res,next)=>{
 
     try{
         const verified=jwt.verify(token,process.env.TOKEN_SECRET);
-        // have to decide what data to send back
-        // req.user=verified;
-        res.status(200).json(verified);
+        // res.status(200).json(verified);
+        res.header({userPayload:JSON.stringify(verified)});
         next();
     }catch(err){
         res.status(400).send('Invalid Token');
