@@ -172,7 +172,10 @@ const create = async (req, res) => {
   const imageArray = await Promise.all(listingImages.map(async(image) => {
     return await db.listingImage.build({ url: image, entityId: listingCreate.id }).save();
   }))
-    return res.status(201).send({ ...listingCreate, image: imageArray })
+    listingCreate["images"] = imageArray
+    const resData={...listingCreate.dataValues,images:[...imageArray]}
+    console.log(resData)
+    return res.status(201).send(resData)
   } catch (err) {
     console.log(err)
     res.status(400).send({err:"something went wrong"})
